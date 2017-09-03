@@ -1,0 +1,48 @@
+<div style="padding: 25px; background: white;">
+  <h1 style="border-bottom: 1px solid #aaa">{{ title }}</h1>
+  <div *ngIf="!isLoading">
+    <h2 style="margin-top: 20px;color: #333; margin-bottom: 1px; display: inline-block;"> {{ repositories['total_count']
+      }}
+      repository results.</h2>
+    <md-select placeholder="Sort Repos" [(ngModel)]="sortSelect" style="display: inline-block; float: right;"
+               (change)="selectSort($event)">
+      <md-option value="">Best Match</md-option>
+      <md-option value="stars">Most Stars</md-option>
+      <md-option value="forks">Most Forks</md-option>
+      <md-option value="updated">Recently Updated</md-option>
+    </md-select>
+  </div>
+</div>
+
+
+<md-nav-list *ngIf="!isLoading">
+  <md-list-item *ngFor="let repo of repositories['items']"
+                style="height:100%;" class="grid-list-item"
+                routerLink="/user/{{ repo['owner']['login'] }}">
+
+    <p mdLine><b>{{ repo['full_name'] }}</b></p>
+
+    <p mdLine style="text-align:right;">
+      <md-icon *ngIf="repo['language']!=null" style="font-size: inherit;">&#xE061;</md-icon>
+      <span> {{ repo['language'] }}</span>
+      <md-icon style="font-size: inherit;">star</md-icon>
+      <span *ngIf="repo['stargazers_count']/1000 <= 1">{{ repo['stargazers_count'] }}</span>
+      <span *ngIf="repo['stargazers_count']/1000 > 1">{{ repo['stargazers_count']/1000 }}k</span>
+      <md-icon style="font-size: inherit;">&#xE417;</md-icon>
+      <span *ngIf="repo['watchers_count']/1000 <= 1">{{ repo['watchers_count'] }}</span>
+      <span *ngIf="repo['watchers_count']/1000 > 1">{{ repo['watchers_count']/1000 }}k</span>
+    </p>
+    <p mdLine class="grid-list-item-p"> {{ repo['description'] | slice:0:40 }} </p>
+    <p mdLine class="grid-list-item-p"><b>Last Updated at:</b> {{ repo['pushed_at'] | date:'medium' }}</p>
+  </md-list-item>
+</md-nav-list>
+<md-spinner style="width: 85%; margin: 100px 0px; padding: 20px" *ngIf="isLoading"></md-spinner>
+
+
+<!--<md-paginator class="pagination" *ngIf="repositories['total_count']!=undefined && !isLoading"-->
+<!--[length]="repositories['total_count']"-->
+<!--[pageSize]="9" (page)="changePage($event);">-->
+<md-paginator class="pagination" *ngIf="repositories['total_count']!=undefined"
+              [length]="repositories['total_count']"
+              [pageSize]="9" (page)="changePage(pageEvent= $event);">
+</md-paginator>

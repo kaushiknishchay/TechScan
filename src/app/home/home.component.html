@@ -1,0 +1,8 @@
+<md-nav-list>
+  <a md-list-item routerLink="/repo/{{ tech }}" *ngFor="let tech of technologies"
+     class="grid-list-item">
+    <!--<md-icon mdListIcon>label</md-icon>-->
+    <i mdListAvatar  style="font-size: 50px" class="{{ techIcons[tech] }}"></i>
+    <h3 mdLine> {{ tech }}</h3>
+  </a>
+</md-nav-list>

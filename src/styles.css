@@ -1,0 +1,90 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+  margin: 0px;
+  background: #f3f3f3;
+}
+
+.mat-icon {
+  text-align: center;
+  vertical-align: text-top;
+}
+
+.flex-container {
+  display: flex;
+  min-height: 100%;
+}
+
+.content-flex {
+  flex: 6;
+  margin: 15px 4%;
+}
+
+.side-nav-flex {
+  margin: 15px;
+  flex: 3;
+  background: white;
+}
+
+.side-nav-item {
+  padding: 2px;
+  border-bottom: 0px solid #eee
+}
+
+.pagination {
+  padding: 18px !important;
+  font-size: 16px;
+}
+
+.grid-list-item {
+  padding: 10px;
+  box-shadow: 2px 2px 2px #ddd;
+  margin-bottom: 15px;
+  background: white;
+}
+
+.grid-list-item-p {
+  padding: 5px !important;
+  margin-top: 5px !important;
+  margin-bottom: 7px !important;
+}
+
+.repo-header {
+  background: white;
+  padding: 16px;
+  border-bottom: 6px solid #e3e3e3;
+  border-radius: 2px 2px 7px 7px;
+  margin: 30px 0px 12px;
+}
+
+.repo-header > span {
+  background: #ddd;
+  border-radius: 50%;
+  padding: 5px 7px;
+  color: #555;
+  margin-left: 8px;
+  font-size: 16px;
+}
+
+.user-repo-grid-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.user-repo-grid-item > .mat-list-item-content {
+  height: 100% !important;
+}
+
+.user-repo-grid-item {
+  height: 120px;
+  margin: 10px;
+  min-width: 45%;
+  flex: 1;
+  /*display: inline-block !important;*/
+  background: #fff;
+  box-shadow: 2px 2px 2px #ddd;
+  padding: 10px
+}

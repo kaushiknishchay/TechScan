@@ -1,0 +1,36 @@
+<md-card *ngIf="!isLoading">
+  <md-card-header>
+    <div md-card-avatar style="width: 100px;height: 100px;">
+      <img src="{{ user_info['items']['avatar_url'] }}" alt="{{ user_info['items']['login'] }}"
+           style="border-radius:10px; width: 100px; margin-right: 10px;"/>
+    </div>
+    <md-card-title><h1>{{ user_info['items']['login'] }}</h1></md-card-title>
+    <md-card-subtitle>{{ user_info['items']['type'] }}</md-card-subtitle>
+  </md-card-header>
+  <!--<img md-card-image src="{{ user_info['items']['avatar_url'] }}" alt="{{ user_info['items']['login'] }}" style="width: 100px;"/>-->
+</md-card>
+
+<h3 class="repo-header" *ngIf="!isLoading">Repositories <span> {{ user_repos.length }} </span></h3>
+<md-nav-list *ngIf="!isLoading" style="">
+  <div class="user-repo-grid-container">
+    <md-list-item *ngFor="let repo of user_repos" class="user-repo-grid-item">
+      <h2 mdLine style="display: block">{{ repo['full_name'] }}</h2>
+      <p mdLine style="text-align:right; margin: 5px; line-height: 2em; min-height: 20px;">
+        <md-icon *ngIf="repo['language']!=null" style="font-size: inherit;">&#xE061;</md-icon>
+        <span> {{ repo['language'] }}</span>
+        <md-icon style="font-size: inherit;">star</md-icon>
+        <span *ngIf="repo['stargazers_count']/1000 <= 1">{{ repo['stargazers_count'] }}</span>
+        <span *ngIf="repo['stargazers_count']/1000 > 1">{{ repo['stargazers_count']/1000 }}k</span>
+        <md-icon style="font-size: inherit;">&#xE417;</md-icon>
+        <span *ngIf="repo['watchers_count']/1000 <= 1">{{ repo['watchers_count'] }}</span>
+        <span *ngIf="repo['watchers_count']/1000 > 1">{{ repo['watchers_count']/1000 }}k</span>
+      </p>
+
+      <p mdLine class="grid-list-item-p"> {{ repo['description'] | slice:0:40 }} </p>
+      <p mdLine class="grid-list-item-p"><b>Last Updated at:</b> {{ repo['pushed_at'] | date:'medium' }}</p>
+
+    </md-list-item>
+  </div>
+</md-nav-list>
+
+<md-spinner style="width: 85%; margin: 100px 0px; padding: 20px" *ngIf="isLoading"></md-spinner>
